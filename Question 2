@@ -1,0 +1,26 @@
+def modify_string(s):
+    new_string = list(s)
+    changed_indices = set()
+
+    for i in range(len(s)):
+        if i in changed_indices:
+            continue
+
+        ascii_value = ord(s[i])
+        if ascii_value % 2 == 0:
+            if i + 1 < len(s):
+                new_ascii = ascii_value + (ascii_value % 7)
+                new_string[i+1] = chr(new_ascii) if new_ascii <= 127 else chr(83)
+                changed_indices.add(i+1)
+        else:
+            if i - 1 >= 0:
+                new_ascii = ascii_value - (ascii_value % 5)
+                new_string[i-1] = chr(new_ascii) if new_ascii >= 0 else chr(83)
+                changed_indices.add(i-1)
+
+    return ''.join(new_string)
+
+s = input("Enter a string: ")
+new_modified_string = modify_string(s)
+print("Modified string:", new_modified_string)
+
