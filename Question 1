@@ -1,0 +1,33 @@
+def find_shortest_substrings(s, x):
+    substrings = []
+
+    for i in range(len(s)):
+        for j in range(i + x - 1, len(s)):
+            if s[i] == s[j] and j - i + 1 >= x:
+                substrings.append(s[i:j+1])
+
+    shortest_length = float('inf')
+    shortest_substrings = []
+
+    for sub in substrings:
+        length = len(sub)
+        if length < shortest_length:
+            shortest_length = length
+            shortest_substrings = [sub]
+        elif length == shortest_length:
+            shortest_substrings.append(sub)
+
+    return shortest_substrings
+
+s = input("Enter a string: ")
+x = int(input("Enter a number x: "))
+shortest_subs = find_shortest_substrings(s, x)
+
+if shortest_subs:
+    print("Shortest substrings with length greater than or equal to", x)
+    for sub in shortest_subs:
+        print(sub)
+else:
+    print("No such substrings found.")
+
+
